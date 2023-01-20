@@ -13,6 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 sh 'docker image build -t $DOCKER_HUB_REPO:latest .'
             }
         }
