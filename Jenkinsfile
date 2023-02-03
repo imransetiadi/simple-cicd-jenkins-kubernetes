@@ -29,14 +29,14 @@ pipeline {
             steps {
                 echo 'Pushing image..'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'sudo docker push $DOCKER_HUB_REPO:latest'
+                sh 'docker push $DOCKER_HUB_REPO:latest'
             }
         }
         stage('Deploy to Cluster Kubernetes') {
             steps {
                 echo 'Deploying....'
-                sh 'sudo kubectl apply -f deployment.yaml'
-                sh 'sudo kubectl apply -f service.yaml'
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
     }
